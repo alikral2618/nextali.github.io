@@ -171,7 +171,18 @@
 
 <script>
     // İlk başta kayıt formunu göster
-    document.getElementById('kayitFormu').style.display = 'block';
+    document.getElementById('kayitFormu').style.display = 'none';
+    document.getElementById('anaSayfa').style.display = 'none';
+    document.getElementById('girisFormu').style.display = 'none';
+
+    // Sayfa yüklendiğinde giriş yapıp yapmadığını kontrol et
+    window.onload = function() {
+        if (localStorage.getItem('email') && localStorage.getItem('password')) {
+            document.getElementById('anaSayfa').style.display = 'block';  // Kayıtlı kullanıcıyı ana sayfaya yönlendir
+        } else {
+            document.getElementById('girisFormu').style.display = 'block';  // Giriş yapmamış kullanıcıyı giriş sayfasına yönlendir
+        }
+    }
 
     // Kayıt formu başarılı olursa
     document.getElementById('form').addEventListener('submit', function(e) {
@@ -189,6 +200,12 @@
         }).then(response => {
             if (response.ok) {
                 mesaj.style.display = 'block';
+
+                // Kayıt bilgilerini localStorage'a kaydet
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
 
                 setTimeout(() => {
                     document.getElementById('kayitFormu').style.display = 'none';
@@ -215,15 +232,16 @@
         const email = document.getElementById('girisEmail').value;
         const password = document.getElementById('girisPassword').value;
 
-        // LocalStorage'a kaydet
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
+        // LocalStorage'daki kayıtlı verilerle karşılaştır
+        if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
+            alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
 
-        alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
-
-        // Ana sayfaya yönlendir
-        document.getElementById('girisFormu').style.display = 'none';
-        document.getElementById('anaSayfa').style.display = 'block';
+            // Ana sayfaya yönlendir
+            document.getElementById('girisFormu').style.display = 'none';
+            document.getElementById('anaSayfa').style.display = 'block';
+        } else {
+            alert("E-posta veya şifre hatalı!");
+        }
     });
 </script>
 

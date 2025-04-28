@@ -127,7 +127,7 @@
             <button type="button" onclick="showLoginForm()">Giriş Yap</button>
         </div>
 
-        <p id="mesaj" style="color: green;">Kayıt başarılı! Ana sayfaya yönlendiriliyorsunuz...</p>
+        <p id="mesaj" style="color: green;">Kayıt başarılı! Lütfen giriş yapın...</p>
     </form>
 </div>
 
@@ -209,7 +209,7 @@
 
                 setTimeout(() => {
                     document.getElementById('kayitFormu').style.display = 'none';
-                    document.getElementById('anaSayfa').style.display = 'block';
+                    document.getElementById('girisFormu').style.display = 'block';  // Giriş formunu göster
                 }, 1500);
             } else {
                 alert("Hata oluştu. Lütfen tekrar deneyin.");

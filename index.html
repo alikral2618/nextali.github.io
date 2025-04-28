@@ -59,6 +59,17 @@
             background-color: #004d40;
         }
 
+        /* Giriş Yap Butonunun Stili */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 48%;
+        }
+
         #anaSayfa {
             background-color: #fffde7;
             min-height: 100vh;
@@ -110,7 +121,11 @@
         <label for="password">Şifreniz</label>
         <input type="password" name="password" id="password" placeholder="Şifrenizi girin" required>
 
-        <button type="submit">Kayıt Ol</button>
+        <!-- Kayıt Ol ve Giriş Yap Butonlarını içeren konteyner -->
+        <div class="button-container">
+            <button type="submit">Kayıt Ol</button>
+            <button type="button" onclick="window.location.href = '#';">Giriş Yap</button>
+        </div>
 
         <p id="mesaj" style="color: green;">Kayıt başarılı! Ana sayfaya yönlendiriliyorsunuz...</p>
     </form>

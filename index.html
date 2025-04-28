@@ -11,7 +11,7 @@
             padding: 0;
         }
 
-        #kayitFormu, #anaSayfa {
+        #kayitFormu, #anaSayfa, #girisFormu {
             display: none;
             text-align: center;
             padding: 50px 20px;
@@ -124,10 +124,25 @@
         <!-- Kayıt Ol ve Giriş Yap Butonlarını içeren konteyner -->
         <div class="button-container">
             <button type="submit">Kayıt Ol</button>
-            <button type="button" onclick="window.location.href = '#';">Giriş Yap</button>
+            <button type="button" onclick="showLoginForm()">Giriş Yap</button>
         </div>
 
         <p id="mesaj" style="color: green;">Kayıt başarılı! Ana sayfaya yönlendiriliyorsunuz...</p>
+    </form>
+</div>
+
+<!-- Giriş Yap Formu -->
+<div id="girisFormu">
+    <h1>Giriş Yapın</h1>
+
+    <form id="girisForm">
+        <label for="girisEmail">E-posta Adresiniz</label>
+        <input type="email" name="email" id="girisEmail" placeholder="ornek@gmail.com" required>
+
+        <label for="girisPassword">Şifreniz</label>
+        <input type="password" name="password" id="girisPassword" placeholder="Şifrenizi girin" required>
+
+        <button type="submit">Giriş Yap</button>
     </form>
 </div>
 
@@ -158,7 +173,7 @@
     // İlk başta kayıt formunu göster
     document.getElementById('kayitFormu').style.display = 'block';
 
-    // Form gönderildiğinde işlemi engelle ve kullanıcayı ana sayfaya yönlendir
+    // Kayıt formu başarılı olursa
     document.getElementById('form').addEventListener('submit', function(e) {
         e.preventDefault();
         const mesaj = document.getElementById('mesaj');
@@ -185,6 +200,30 @@
         }).catch(error => {
             alert("Bir hata meydana geldi: " + error);
         });
+    });
+
+    // Giriş formunu göster
+    function showLoginForm() {
+        document.getElementById('kayitFormu').style.display = 'none';
+        document.getElementById('girisFormu').style.display = 'block';
+    }
+
+    // Giriş yapıldığında oturum aç ve ana sayfaya yönlendir
+    document.getElementById('girisForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('girisEmail').value;
+        const password = document.getElementById('girisPassword').value;
+
+        // LocalStorage'a kaydet
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+
+        alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
+
+        // Ana sayfaya yönlendir
+        document.getElementById('girisFormu').style.display = 'none';
+        document.getElementById('anaSayfa').style.display = 'block';
     });
 </script>
 

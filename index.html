@@ -11,19 +11,14 @@
             padding: 0;
         }
 
-        #kayitFormu, #anaSayfa, #girisFormu {
+        #kayitFormu, #anaSayfa, #girisFormu, #adminPaneli, #sepet {
             display: none;
             text-align: center;
             padding: 50px 20px;
         }
 
         #kayitFormu {
-            background-color: #e0e0e0; /* Gri ton */
-            height: 100vh;
-        }
-
-        #girisFormu {
-            background-color: #f5f5f5;
+            background-color: #e0f7fa;
             height: 100vh;
         }
 
@@ -64,6 +59,7 @@
             background-color: #004d40;
         }
 
+        /* Giriş Yap Butonunun Stili */
         .button-container {
             display: flex;
             justify-content: space-between;
@@ -75,7 +71,7 @@
         }
 
         #anaSayfa {
-            background-color: #0d47a1; /* Koyu mavi */
+            background-color: #004d40;
             color: white;
             min-height: 100vh;
         }
@@ -88,7 +84,7 @@
             border-radius: 10px;
             width: 200px;
             background: white;
-            color: black;
+            color: #004d40;
         }
 
         .product img {
@@ -97,24 +93,31 @@
             border-radius: 5px;
         }
 
-        .product button {
-            background-color: #0d47a1;
-            margin-top: 10px;
-            width: 100%;
-        }
-
         #mesaj {
             display: none;
             margin-top: 20px;
             font-size: 16px;
-            color: green;
         }
 
-        #logoutBtn {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #ff5252;
+        #sepet {
+            background-color: #fffde7;
+            min-height: 100vh;
+        }
+
+        #adminPaneli {
+            background-color: #d1c4e9;
+            min-height: 100vh;
+        }
+
+        .sepet-urun {
+            margin: 10px;
+            border: 1px solid #00796b;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sepet-urun button {
+            background-color: #f44336;
         }
 
         @media (max-width: 600px) {
@@ -125,15 +128,6 @@
             form {
                 width: 90%;
             }
-
-            .button-container {
-                flex-direction: column;
-            }
-
-            .button-container button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
         }
     </style>
 </head>
@@ -142,6 +136,7 @@
 <!-- Kayıt Formu -->
 <div id="kayitFormu">
     <h1>Şirketimize Kayıt Olun</h1>
+
     <form id="form" action="https://formspree.io/f/xblodlon" method="POST">
         <label for="email">E-posta Adresiniz</label>
         <input type="email" name="email" id="email" placeholder="ornek@gmail.com" required>
@@ -154,13 +149,14 @@
             <button type="button" onclick="showLoginForm()">Giriş Yap</button>
         </div>
 
-        <p id="mesaj">Kayıt başarılı! Lütfen giriş yapın.</p>
+        <p id="mesaj" style="color: green;">Kayıt başarılı! Lütfen giriş yapın...</p>
     </form>
 </div>
 
 <!-- Giriş Yap Formu -->
 <div id="girisFormu">
     <h1>Giriş Yapın</h1>
+
     <form id="girisForm">
         <label for="girisEmail">E-posta Adresiniz</label>
         <input type="email" name="email" id="girisEmail" placeholder="ornek@gmail.com" required>
@@ -172,97 +168,94 @@
     </form>
 </div>
 
-<!-- Ana Sayfa (Mağaza) -->
+<!-- Admin Paneli -->
+<div id="adminPaneli">
+    <h1>Admin Paneli</h1>
+    <form id="urunEkleForm">
+        <label for="urunAd">Ürün Adı</label>
+        <input type="text" id="urunAd" placeholder="Ürün adı" required>
+
+        <label for="urunFiyat">Ürün Fiyatı</label>
+        <input type="number" id="urunFiyat" placeholder="Ürün fiyatı" required>
+
+        <label for="urunResim">Ürün Resmi URL</label>
+        <input type="text" id="urunResim" placeholder="Ürün resim URL'si" required>
+
+        <button type="submit">Ürün Ekle</button>
+    </form>
+</div>
+
+<!-- Ana Sayfa -->
 <div id="anaSayfa">
-    <button id="logoutBtn" onclick="logout()">Çıkış Yap</button>
     <h1>Mağazamıza Hoş Geldiniz!</h1>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 1">
         <h3>Ürün 1</h3>
         <p>₺100</p>
-        <button>Satın Al</button>
+        <button onclick="addToCart('Ürün 1', 100)">Satın Al</button>
     </div>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 2">
         <h3>Ürün 2</h3>
         <p>₺150</p>
-        <button>Satın Al</button>
+        <button onclick="addToCart('Ürün 2', 150)">Satın Al</button>
     </div>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 3">
         <h3>Ürün 3</h3>
         <p>₺200</p>
-        <button>Satın Al</button>
+        <button onclick="addToCart('Ürün 3', 200)">Satın Al</button>
     </div>
+
+    <button onclick="goToCart()">Sepete Git</button>
+</div>
+
+<!-- Sepet Sayfası -->
+<div id="sepet">
+    <h1>Sepetiniz</h1>
+    <div id="sepetUrunler"></div>
+    <p><strong>Toplam: ₺<span id="toplamFiyat">0</span></strong></p>
+    <button onclick="goToHomePage()">Ana Sayfaya Dön</button>
 </div>
 
 <script>
-    // Sayfa yüklendiğinde oturum kontrolü yapılır
-    window.onload = function () {
-        if (sessionStorage.getItem('oturumAcik') === 'true') {
-            document.getElementById('anaSayfa').style.display = 'block';
-        } else {
-            document.getElementById('kayitFormu').style.display = 'block';
-        }
+    // Sepet tutarları
+    let cart = [];
+
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        alert(`${name} sepete eklendi!`);
     }
 
-    // Kayıt formu gönderildiğinde
-    document.getElementById('form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const mesaj = document.getElementById('mesaj');
-        mesaj.style.display = 'none';
+    function goToCart() {
+        const sepetDiv = document.getElementById('sepetUrunler');
+        sepetDiv.innerHTML = '';  // Sepet içeriğini sıfırlıyoruz
+        let toplamFiyat = 0;
 
-        fetch("https://formspree.io/f/xblodlon", {
-            method: "POST",
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(this)
-        }).then(response => {
-            if (response.ok) {
-                mesaj.style.display = 'block';
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
-
-                setTimeout(() => {
-                    document.getElementById('kayitFormu').style.display = 'none';
-                    document.getElementById('girisFormu').style.display = 'block';
-                }, 1500);
-            } else {
-                alert("Hata oluştu. Lütfen tekrar deneyin.");
-            }
-        }).catch(error => {
-            alert("Bir hata meydana geldi: " + error);
+        cart.forEach(item => {
+            const urunDiv = document.createElement('div');
+            urunDiv.classList.add('sepet-urun');
+            urunDiv.innerHTML = `${item.name} - ₺${item.price} <button onclick="removeFromCart('${item.name}')">Sil</button>`;
+            sepetDiv.appendChild(urunDiv);
+            toplamFiyat += item.price;
         });
-    });
 
-    function showLoginForm() {
-        document.getElementById('kayitFormu').style.display = 'none';
-        document.getElementById('girisFormu').style.display = 'block';
+        document.getElementById('toplamFiyat').innerText = toplamFiyat;
+        document.getElementById('anaSayfa').style.display = 'none';
+        document.getElementById('sepet').style.display = 'block';
     }
 
-    document.getElementById('girisForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+    function removeFromCart(itemName) {
+        cart = cart.filter(item => item.name !== itemName);
+        goToCart();
+    }
 
-        const email = document.getElementById('girisEmail').value;
-        const password = document.getElementById('girisPassword').value;
-
-        if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
-            alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
-            sessionStorage.setItem('oturumAcik', 'true');
-            document.getElementById('girisFormu').style.display = 'none';
-            document.getElementById('anaSayfa').style.display = 'block';
-        } else {
-            alert("E-posta veya şifre hatalı!");
-        }
-    });
-
-    function logout() {
-        sessionStorage.removeItem('oturumAcik');
-        location.reload(); // Sayfayı yenileyip giriş ekranına döndür
+    function goToHomePage() {
+        document.getElementById('sepet').style.display = 'none';
+        document.getElementById('anaSayfa').style.display = 'block';
     }
 </script>
 

@@ -11,7 +11,7 @@
             padding: 0;
         }
 
-        #kayitFormu, #anaSayfa, #girisFormu, #adminPaneli, #sepet {
+        #kayitFormu, #anaSayfa, #girisFormu, #adminPaneli, #sepet, #adminGirisFormu {
             display: none;
             text-align: center;
             padding: 50px 20px;
@@ -109,6 +109,12 @@
             min-height: 100vh;
         }
 
+        #adminGirisFormu {
+            background-color: #e3f2fd;
+            padding: 50px;
+            min-height: 100vh;
+        }
+
         .sepet-urun {
             margin: 10px;
             border: 1px solid #00796b;
@@ -163,6 +169,21 @@
 
         <label for="girisPassword">Şifreniz</label>
         <input type="password" name="password" id="girisPassword" placeholder="Şifrenizi girin" required>
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+</div>
+
+<!-- Admin Paneline Giriş Formu -->
+<div id="adminGirisFormu">
+    <h1>Admin Giriş Yapın</h1>
+
+    <form id="adminGirisForm">
+        <label for="adminEmail">Kullanıcı Adınız</label>
+        <input type="text" id="adminEmail" placeholder="Admin kullanıcı adı" required>
+
+        <label for="adminPassword">Şifreniz</label>
+        <input type="password" id="adminPassword" placeholder="Admin şifresi" required>
 
         <button type="submit">Giriş Yap</button>
     </form>
@@ -225,38 +246,57 @@
     // Sepet tutarları
     let cart = [];
 
-    function addToCart(name, price) {
-        cart.push({ name, price });
-        alert(`${name} sepete eklendi!`);
+    function addToCart(productName, price) {
+        cart.push({ name: productName, price: price });
+        alert(productName + " sepete eklendi!");
     }
 
     function goToCart() {
-        const sepetDiv = document.getElementById('sepetUrunler');
-        sepetDiv.innerHTML = '';  // Sepet içeriğini sıfırlıyoruz
-        let toplamFiyat = 0;
-
+        let cartHtml = "";
+        let totalPrice = 0;
         cart.forEach(item => {
-            const urunDiv = document.createElement('div');
-            urunDiv.classList.add('sepet-urun');
-            urunDiv.innerHTML = `${item.name} - ₺${item.price} <button onclick="removeFromCart('${item.name}')">Sil</button>`;
-            sepetDiv.appendChild(urunDiv);
-            toplamFiyat += item.price;
+            cartHtml += `<div class="sepet-urun">${item.name} - ₺${item.price}</div>`;
+            totalPrice += item.price;
         });
-
-        document.getElementById('toplamFiyat').innerText = toplamFiyat;
+        document.getElementById('sepetUrunler').innerHTML = cartHtml;
+        document.getElementById('toplamFiyat').innerText = totalPrice;
         document.getElementById('anaSayfa').style.display = 'none';
         document.getElementById('sepet').style.display = 'block';
-    }
-
-    function removeFromCart(itemName) {
-        cart = cart.filter(item => item.name !== itemName);
-        goToCart();
     }
 
     function goToHomePage() {
         document.getElementById('sepet').style.display = 'none';
         document.getElementById('anaSayfa').style.display = 'block';
     }
+
+    // Admin giriş kontrolü
+    document.getElementById('adminGirisForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const adminEmail = document.getElementById('adminEmail').value;
+        const adminPassword = document.getElementById('adminPassword').value;
+
+        if (adminEmail === 'admin' && adminPassword === '1234') {
+            alert("Admin girişi başarılı!");
+            document.getElementById('adminGirisFormu').style.display = 'none';
+            document.getElementById('adminPaneli').style.display = 'block';
+        } else {
+            alert("Hatalı kullanıcı adı veya şifre!");
+        }
+    });
+
+    // Ürün ekleme
+    document.getElementById('urunEkleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const urunAd = document.getElementById('urunAd').value;
+        const urunFiyat = document.getElementById('urunFiyat').value;
+        const urunResim = document.getElementById('urunResim').value;
+
+        // Admin paneline yeni ürün ekleme
+        alert(`${urunAd} ürününü eklediniz!`);
+        // Burada ürün verisini bir backend'e kaydedebilirsiniz (Bu sadece frontend kısmıdır)
+    });
 </script>
 
 </body>

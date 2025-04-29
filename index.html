@@ -18,7 +18,12 @@
         }
 
         #kayitFormu {
-            background-color: #e0f7fa;
+            background-color: #e0e0e0; /* Gri ton */
+            height: 100vh;
+        }
+
+        #girisFormu {
+            background-color: #f5f5f5;
             height: 100vh;
         }
 
@@ -59,7 +64,6 @@
             background-color: #004d40;
         }
 
-        /* Giriş Yap Butonunun Stili */
         .button-container {
             display: flex;
             justify-content: space-between;
@@ -71,7 +75,8 @@
         }
 
         #anaSayfa {
-            background-color: #fffde7;
+            background-color: #0d47a1; /* Koyu mavi */
+            color: white;
             min-height: 100vh;
         }
 
@@ -83,6 +88,7 @@
             border-radius: 10px;
             width: 200px;
             background: white;
+            color: black;
         }
 
         .product img {
@@ -91,10 +97,24 @@
             border-radius: 5px;
         }
 
+        .product button {
+            background-color: #0d47a1;
+            margin-top: 10px;
+            width: 100%;
+        }
+
         #mesaj {
             display: none;
             margin-top: 20px;
             font-size: 16px;
+            color: green;
+        }
+
+        #logoutBtn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #ff5252;
         }
 
         @media (max-width: 600px) {
@@ -105,6 +125,15 @@
             form {
                 width: 90%;
             }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .button-container button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -113,7 +142,6 @@
 <!-- Kayıt Formu -->
 <div id="kayitFormu">
     <h1>Şirketimize Kayıt Olun</h1>
-
     <form id="form" action="https://formspree.io/f/xblodlon" method="POST">
         <label for="email">E-posta Adresiniz</label>
         <input type="email" name="email" id="email" placeholder="ornek@gmail.com" required>
@@ -121,20 +149,18 @@
         <label for="password">Şifreniz</label>
         <input type="password" name="password" id="password" placeholder="Şifrenizi girin" required>
 
-        <!-- Kayıt Ol ve Giriş Yap Butonlarını içeren konteyner -->
         <div class="button-container">
             <button type="submit">Kayıt Ol</button>
             <button type="button" onclick="showLoginForm()">Giriş Yap</button>
         </div>
 
-        <p id="mesaj" style="color: green;">Kayıt başarılı! Giriş yapın!</p>
+        <p id="mesaj">Kayıt başarılı! Lütfen giriş yapın.</p>
     </form>
 </div>
 
 <!-- Giriş Yap Formu -->
 <div id="girisFormu">
     <h1>Giriş Yapın</h1>
-
     <form id="girisForm">
         <label for="girisEmail">E-posta Adresiniz</label>
         <input type="email" name="email" id="girisEmail" placeholder="ornek@gmail.com" required>
@@ -146,62 +172,56 @@
     </form>
 </div>
 
-<!-- Ana Sayfa -->
+<!-- Ana Sayfa (Mağaza) -->
 <div id="anaSayfa">
+    <button id="logoutBtn" onclick="logout()">Çıkış Yap</button>
     <h1>Mağazamıza Hoş Geldiniz!</h1>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 1">
         <h3>Ürün 1</h3>
         <p>₺100</p>
+        <button>Satın Al</button>
     </div>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 2">
         <h3>Ürün 2</h3>
         <p>₺150</p>
+        <button>Satın Al</button>
     </div>
 
     <div class="product">
         <img src="https://via.placeholder.com/200x150" alt="Ürün 3">
         <h3>Ürün 3</h3>
         <p>₺200</p>
+        <button>Satın Al</button>
     </div>
 </div>
 
 <script>
-    // İlk başta kayıt formunu göster
-    document.getElementById('kayitFormu').style.display = 'none';
-    document.getElementById('anaSayfa').style.display = 'none';
-    document.getElementById('girisFormu').style.display = 'none';
-
-    // Sayfa yüklendiğinde giriş yapıp yapmadığını kontrol et
-    window.onload = function() {
-        if (localStorage.getItem('email') && localStorage.getItem('password')) {
-            document.getElementById('anaSayfa').style.display = 'block';  // Kayıtlı kullanıcıyı ana sayfaya yönlendir
+    // Sayfa yüklendiğinde oturum kontrolü yapılır
+    window.onload = function () {
+        if (sessionStorage.getItem('oturumAcik') === 'true') {
+            document.getElementById('anaSayfa').style.display = 'block';
         } else {
-            document.getElementById('kayitFormu').style.display = 'block';  // Giriş yapmamış kullanıcıyı kayıt sayfasına yönlendir
+            document.getElementById('kayitFormu').style.display = 'block';
         }
     }
 
-    // Kayıt formu başarılı olursa
-    document.getElementById('form').addEventListener('submit', function(e) {
+    // Kayıt formu gönderildiğinde
+    document.getElementById('form').addEventListener('submit', function (e) {
         e.preventDefault();
         const mesaj = document.getElementById('mesaj');
         mesaj.style.display = 'none';
 
-        // Formspree'ye gönderim
         fetch("https://formspree.io/f/xblodlon", {
             method: "POST",
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: { 'Accept': 'application/json' },
             body: new FormData(this)
         }).then(response => {
             if (response.ok) {
                 mesaj.style.display = 'block';
-
-                // Kayıt bilgilerini localStorage'a kaydet
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 localStorage.setItem('email', email);
@@ -219,30 +239,31 @@
         });
     });
 
-    // Giriş formunu göster
     function showLoginForm() {
         document.getElementById('kayitFormu').style.display = 'none';
         document.getElementById('girisFormu').style.display = 'block';
     }
 
-    // Giriş yapıldığında oturum aç ve ana sayfaya yönlendir
-    document.getElementById('girisForm').addEventListener('submit', function(e) {
+    document.getElementById('girisForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
         const email = document.getElementById('girisEmail').value;
         const password = document.getElementById('girisPassword').value;
 
-        // LocalStorage'daki kayıtlı verilerle karşılaştır
         if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
             alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
-
-            // Ana sayfaya yönlendir
+            sessionStorage.setItem('oturumAcik', 'true');
             document.getElementById('girisFormu').style.display = 'none';
             document.getElementById('anaSayfa').style.display = 'block';
         } else {
             alert("E-posta veya şifre hatalı!");
         }
     });
+
+    function logout() {
+        sessionStorage.removeItem('oturumAcik');
+        location.reload(); // Sayfayı yenileyip giriş ekranına döndür
+    }
 </script>
 
 </body>

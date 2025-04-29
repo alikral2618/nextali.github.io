@@ -127,7 +127,7 @@
             <button type="button" onclick="showLoginForm()">Giriş Yap</button>
         </div>
 
-        <p id="mesaj" style="color: green;">Kayıt başarılı! Lütfen giriş yapın...</p>
+        <p id="mesaj" style="color: green;">Kayıt başarılı! Giriş yapın!</p>
     </form>
 </div>
 
@@ -180,7 +180,7 @@
         if (localStorage.getItem('email') && localStorage.getItem('password')) {
             document.getElementById('anaSayfa').style.display = 'block';  // Kayıtlı kullanıcıyı ana sayfaya yönlendir
         } else {
-            document.getElementById('girisFormu').style.display = 'block';  // Giriş yapmamış kullanıcıyı giriş sayfasına yönlendir
+            document.getElementById('kayitFormu').style.display = 'block';  // Giriş yapmamış kullanıcıyı kayıt sayfasına yönlendir
         }
     }
 
@@ -209,7 +209,7 @@
 
                 setTimeout(() => {
                     document.getElementById('kayitFormu').style.display = 'none';
-                    document.getElementById('girisFormu').style.display = 'block';  // Giriş formunu göster
+                    document.getElementById('girisFormu').style.display = 'block';
                 }, 1500);
             } else {
                 alert("Hata oluştu. Lütfen tekrar deneyin.");

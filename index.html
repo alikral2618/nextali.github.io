@@ -258,6 +258,8 @@
 
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
+                
+                // Kullanıcı bilgilerini localStorage'a kaydediyoruz
                 localStorage.setItem('email', email);
                 localStorage.setItem('password', password);
 
@@ -273,13 +275,7 @@
         });
     });
 
-    // Giriş formunu göster
-    function showLoginForm() {
-        document.getElementById('kayitFormu').style.display = 'none';
-        document.getElementById('girisFormu').style.display = 'block';
-    }
-
-    // Giriş yapıldığında oturum aç ve ana sayfaya yönlendir
+    // Giriş yapıldığında
     document.getElementById('girisForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -288,27 +284,10 @@
 
         if (email === localStorage.getItem('email') && password === localStorage.getItem('password')) {
             alert("Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...");
-
             document.getElementById('girisFormu').style.display = 'none';
             document.getElementById('anaSayfa').style.display = 'block';
         } else {
             alert("E-posta veya şifre hatalı!");
-        }
-    });
-
-    // Admin giriş formunu kontrol et
-    document.getElementById('adminGirisForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const adminEmail = document.getElementById('adminEmail').value;
-        const adminPassword = document.getElementById('adminPassword').value;
-
-        if (adminEmail === 'admin' && adminPassword === '1234') {
-            alert("Admin girişi başarılı!");
-            document.getElementById('adminGirisFormu').style.display = 'none';
-            document.getElementById('adminPaneli').style.display = 'block';
-        } else {
-            alert("Hatalı kullanıcı adı veya şifre!");
         }
     });
 </script>

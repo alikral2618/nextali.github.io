@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ayakkabıcım</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,100 +12,121 @@
     nav ul li { margin: 0 15px; }
     nav ul li a { color: #fff; text-decoration: none; font-weight: bold; }
     .hero { background: #ddd; padding: 40px; text-align: center; }
-    .products, .product-detail, .cart, .login { padding: 40px 20px; max-width: 1200px; margin: auto; }
-    .products h2, .product-detail h2, .cart h2 { margin-bottom: 20px; }
-    .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
     .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
-    .product-item img { width: 100%; height: auto; }
-    .product-item p { margin: 10px 0; }
-    .product-item a, button { background: #333; color: #fff; padding: 8px 12px; border: none; text-decoration: none; cursor: pointer; }
-    .product-detail img { max-width: 300px; display: block; margin-bottom: 20px; }
-    .cart table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
-    @media(max-width: 600px) {
-      .product-list { flex-direction: column; align-items: center; }
-    }
+    .cart, .product-detail { padding: 40px 20px; text-align: center; }
+    .cart table { width: 100%; border-collapse: collapse; }
+    .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    .payment { padding: 40px 20px; text-align: center; }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <h1>Ayakkabıcım</h1>
     <nav>
       <ul>
-        <li><a href="#anasayfa">Anasayfa</a></li>
-        <li><a href="#urunler">Ürünler</a></li>
-        <li><a href="#detay">Ürün Detayı</a></li>
-        <li><a href="#sepet">Sepet</a></li>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="products.html">Ürünler</a></li>
+        <li><a href="cart.html">Sepet</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Alanı -->
-  <section class="hero" id="anasayfa">
+  <!-- Ana Sayfa -->
+  <section class="hero">
     <h2>Yeni Sezon Ayakkabılar</h2>
     <p>Modern, şık ve konforlu modeller burada!</p>
-  </section>
-
-  <!-- Ürünler -->
-  <section class="products" id="urunler">
-    <h2>Ürünler</h2>
-    <div class="product-list">
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Ürün 1" />
-        <p>Erkek Spor Ayakkabı</p>
-        <p>₺299,00</p>
-        <a href="#detay">Detaylar</a>
-      </div>
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Ürün 2" />
-        <p>Kadın Günlük Ayakkabı</p>
-        <p>₺259,00</p>
-        <a href="#detay">Detaylar</a>
-      </div>
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Ürün 3" />
-        <p>Çocuk Bot</p>
-        <p>₺199,00</p>
-        <a href="#detay">Detaylar</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ürün Detay -->
-  <section class="product-detail" id="detay">
-    <h2>Ürün Detayı</h2>
-    <img src="https://via.placeholder.com/300" alt="Detay Görseli" />
-    <p><strong>Ürün Adı:</strong> Erkek Spor Ayakkabı</p>
-    <p><strong>Fiyat:</strong> ₺299,00</p>
-    <p><strong>Açıklama:</strong> Günlük kullanıma uygun, rahat tabanlı erkek spor ayakkabı.</p>
-    <button onclick="alert('Sepete eklendi!')">Sepete Ekle</button>
-  </section>
-
-  <!-- Sepet -->
-  <section class="cart" id="sepet">
-    <h2>Sepetiniz</h2>
-    <table>
-      <tr>
-        <th>Ürün</th>
-        <th>Adet</th>
-        <th>Fiyat</th>
-        <th>Toplam</th>
-      </tr>
-      <tr>
-        <td>Erkek Spor Ayakkabı</td>
-        <td>1</td>
-        <td>₺299,00</td>
-        <td>₺299,00</td>
-      </tr>
-    </table>
-    <p><strong>Genel Toplam:</strong> ₺299,00</p>
   </section>
 
   <footer>
     <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
   </footer>
+
+  <!-- Ürünler Sayfası -->
+  <section class="product-list">
+    <div class="product-item">
+      <img src="https://via.placeholder.com/200" alt="Ürün 1" />
+      <p>Erkek Spor Ayakkabı</p>
+      <p>₺299,00</p>
+      <a href="product.html?id=1">Detaylar</a>
+    </div>
+    <div class="product-item">
+      <img src="https://via.placeholder.com/200" alt="Ürün 2" />
+      <p>Kadın Günlük Ayakkabı</p>
+      <p>₺259,00</p>
+      <a href="product.html?id=2">Detaylar</a>
+    </div>
+    <div class="product-item">
+      <img src="https://via.placeholder.com/200" alt="Ürün 3" />
+      <p>Çocuk Bot</p>
+      <p>₺199,00</p>
+      <a href="product.html?id=3">Detaylar</a>
+    </div>
+  </section>
+
+  <!-- Ürün Detayı Sayfası -->
+  <section class="product-detail">
+    <h2>Erkek Spor Ayakkabı</h2>
+    <img src="https://via.placeholder.com/300" alt="Erkek Spor Ayakkabı" />
+    <p><strong>Fiyat:</strong> ₺299,00</p>
+    <p><strong>Renk:</strong> Siyah, Beyaz, Mavi</p>
+    <p><strong>Numara:</strong> 40, 41, 42, 43, 44</p>
+    <button onclick="addToCart()">Sepete Ekle</button>
+  </section>
+
+  <!-- Sepet Sayfası -->
+  <section class="cart">
+    <h2>Sepetiniz</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Ürün</th>
+          <th>Adet</th>
+          <th>Fiyat</th>
+          <th>Toplam</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Erkek Spor Ayakkabı</td>
+          <td>1</td>
+          <td>₺299,00</td>
+          <td>₺299,00</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Genel Toplam:</strong> ₺299,00</p>
+
+    <h3>Ödeme Yöntemi Seçiniz</h3>
+    <form action="payment.html" method="POST">
+      <label><input type="radio" name="payment-method" value="credit-card" /> Kredi Kartı</label><br />
+      <label><input type="radio" name="payment-method" value="paypal" /> PayPal</label><br />
+      <label><input type="radio" name="payment-method" value="bank-transfer" /> Havale/EFT</label><br />
+      <button type="submit">Ödeme Yap</button>
+    </form>
+  </section>
+
+  <!-- Ödeme Sayfası -->
+  <section class="payment">
+    <h2>Ödeme Yöntemi Seçildi: Kredi Kartı</h2>
+    <p><strong>Fiyat:</strong> ₺299,00</p>
+    <button onclick="completePurchase()">Satın Al</button>
+  </section>
+
+  <script>
+    function addToCart() {
+      alert('Ürün sepete eklendi!');
+      window.location.href = 'cart.html';
+    }
+
+    function completePurchase() {
+      alert('Ödeme başarıyla tamamlandı!');
+      window.location.href = 'index.html';
+    }
+  </script>
 
 </body>
 </html>

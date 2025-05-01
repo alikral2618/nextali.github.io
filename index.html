@@ -201,6 +201,33 @@
     </footer>
   </div>
 
+  <!-- Kadın Ayakkabıları Kategorisi Ürün Listesi -->
+  <div id="kadin" class="content" style="display: none;">
+    <h1 class="header-title">Kadın Ayakkabıları</h1>
+    <p class="sub-title">Şıklığınızı tamamlayacak kadın ayakkabıları burada!</p>
+    
+    <div class="product-list">
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Kadın Topuklu Ayakkabı">
+        <p>Kadın Topuklu Ayakkabı</p>
+        <p>₺349,00</p>
+        <button onclick="addToCart('Kadın Topuklu Ayakkabı', 349.00)">Sepete Ekle</button>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Kadın Babet">
+        <p>Kadın Babet</p>
+        <p>₺199,00</p>
+        <button onclick="addToCart('Kadın Babet', 199.00)">Sepete Ekle</button>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Kadın Sneakers">
+        <p>Kadın Sneakers</p>
+        <p>₺259,00</p>
+        <button onclick="addToCart('Kadın Sneakers', 259.00)">Sepete Ekle</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Sepet Sayfası -->
   <div id="cart-page" class="cart-page" style="display: none;">
     <h2>Sepetiniz</h2>
@@ -262,6 +289,13 @@
       alert('Ödeme başarıyla tamamlandı!');
       window.location.href = 'index.html'; // Ana sayfaya yönlendir
     }
+
+    // Kadın Ayakkabıları Kategorisine tıklanınca içerik göster
+    window.onload = function() {
+      if (window.location.href.includes("#kadin")) {
+        document.getElementById("kadin").style.display = "block";
+      }
+    };
   </script>
 
 </body>

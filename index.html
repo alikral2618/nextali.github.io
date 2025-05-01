@@ -14,11 +14,13 @@
     .hero { background: #ddd; padding: 40px; text-align: center; }
     .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
     .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
+    .product-item img { width: 100%; height: auto; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
-    .cart, .product-detail { padding: 40px 20px; text-align: center; }
+    .cart, .product-detail, .payment { padding: 40px 20px; text-align: center; }
     .cart table { width: 100%; border-collapse: collapse; }
     .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    .payment { padding: 40px 20px; text-align: center; }
+    .payment input { padding: 8px 12px; margin: 10px 0; }
+    .payment button { background: #333; color: #fff; padding: 10px 20px; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -45,29 +47,29 @@
     <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
   </footer>
 
-  <!-- Ürünler Sayfası -->
+  <!-- Ürünler Sayfası (products.html) -->
   <section class="product-list">
     <div class="product-item">
-      <img src="https://via.placeholder.com/200" alt="Ürün 1" />
+      <img src="https://via.placeholder.com/200" alt="Erkek Spor Ayakkabı" />
       <p>Erkek Spor Ayakkabı</p>
       <p>₺299,00</p>
       <a href="product.html?id=1">Detaylar</a>
     </div>
     <div class="product-item">
-      <img src="https://via.placeholder.com/200" alt="Ürün 2" />
+      <img src="https://via.placeholder.com/200" alt="Kadın Günlük Ayakkabı" />
       <p>Kadın Günlük Ayakkabı</p>
       <p>₺259,00</p>
       <a href="product.html?id=2">Detaylar</a>
     </div>
     <div class="product-item">
-      <img src="https://via.placeholder.com/200" alt="Ürün 3" />
+      <img src="https://via.placeholder.com/200" alt="Çocuk Bot" />
       <p>Çocuk Bot</p>
       <p>₺199,00</p>
       <a href="product.html?id=3">Detaylar</a>
     </div>
   </section>
 
-  <!-- Ürün Detayı Sayfası -->
+  <!-- Ürün Detayı Sayfası (product.html) -->
   <section class="product-detail">
     <h2>Erkek Spor Ayakkabı</h2>
     <img src="https://via.placeholder.com/300" alt="Erkek Spor Ayakkabı" />
@@ -77,7 +79,7 @@
     <button onclick="addToCart()">Sepete Ekle</button>
   </section>
 
-  <!-- Sepet Sayfası -->
+  <!-- Sepet Sayfası (cart.html) -->
   <section class="cart">
     <h2>Sepetiniz</h2>
     <table>
@@ -109,7 +111,7 @@
     </form>
   </section>
 
-  <!-- Ödeme Sayfası -->
+  <!-- Ödeme Sayfası (payment.html) -->
   <section class="payment">
     <h2>Ödeme Yöntemi Seçildi: Kredi Kartı</h2>
     <p><strong>Fiyat:</strong> ₺299,00</p>

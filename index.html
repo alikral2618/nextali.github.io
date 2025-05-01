@@ -15,10 +15,11 @@
     .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px; }
     .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
     .product-item img { width: 100%; height: auto; }
-    footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
-    .cart, .product-detail, .payment { padding: 40px 20px; text-align: center; }
+    footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; position: absolute; bottom: 0; width: 100%; }
+    .cart, .product-detail { padding: 40px 20px; text-align: center; }
     .cart table { width: 100%; border-collapse: collapse; }
     .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    .payment { padding: 40px 20px; text-align: center; }
     .payment input { padding: 8px 12px; margin: 10px 0; }
     .payment button { background: #333; color: #fff; padding: 10px 20px; border: none; cursor: pointer; }
   </style>
@@ -42,10 +43,6 @@
     <h2>Yeni Sezon Ayakkabılar</h2>
     <p>Modern, şık ve konforlu modeller burada!</p>
   </section>
-
-  <footer>
-    <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
-  </footer>
 
   <!-- Ürünler Sayfası (products.html) -->
   <section class="product-list">
@@ -76,7 +73,7 @@
     <p><strong>Fiyat:</strong> ₺299,00</p>
     <p><strong>Renk:</strong> Siyah, Beyaz, Mavi</p>
     <p><strong>Numara:</strong> 40, 41, 42, 43, 44</p>
-    <button onclick="addToCart()">Sepete Ekle</button>
+    <a href="cart.html"><button>Sepete Ekle</button></a>
   </section>
 
   <!-- Sepet Sayfası (cart.html) -->
@@ -129,6 +126,11 @@
       window.location.href = 'index.html';
     }
   </script>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
+  </footer>
 
 </body>
 </html>

@@ -32,7 +32,7 @@
     <nav>
       <ul>
         <li><a href="#">Anasayfa</a></li>
-        <li><a href="#cart">Sepet</a></li>
+        <li><a href="#cart">Sepetim</a></li>
       </ul>
     </nav>
   </header>
@@ -83,12 +83,6 @@
       </tbody>
     </table>
 
-    <p><strong>Genel Toplam:</strong> <span id="total-price">₺0,00</span></p>
-
-    <h3>Seçtiğiniz Özellikler</h3>
-    <p><strong>Renk:</strong> Siyah</p>
-    <p><strong>Numara:</strong> 42</p>
-
     <h3>Ödeme Yöntemi Seçiniz</h3>
     <form id="payment-form">
       <label><input type="radio" name="payment-method" value="credit-card" /> Kredi Kartı</label><br />
@@ -125,16 +119,14 @@
     // Sepet içeriğini render etme
     function renderCart() {
       const cartTableBody = document.getElementById('cart-body');
-      const totalPriceElement = document.getElementById('total-price');
       
       // Sepet boşsa tabloyu temizle
       if (cart.length === 0) {
         cartTableBody.innerHTML = "<tr><td colspan='4'>Sepetinizde ürün bulunmamaktadır.</td></tr>";
-        totalPriceElement.textContent = "₺0,00";
         return;
       }
       
-      // Tabloyu ve toplam fiyatı güncelle
+      // Tabloyu güncelle
       cartTableBody.innerHTML = cart.map(item => `
         <tr>
           <td>${item.name}</td>
@@ -143,9 +135,6 @@
           <td>₺${item.price.toFixed(2)}</td>
         </tr>
       `).join('');
-
-      const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
-      totalPriceElement.textContent = `₺${totalPrice.toFixed(2)}`;
 
       // Ödeme butonunu aktif et
       document.getElementById('payment-button').disabled = false;

@@ -62,12 +62,27 @@
       flex-grow: 1;
     }
 
+    /* Başlık */
+    .header-title {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 2.5em;
+      color: #333;
+    }
+
+    .sub-title {
+      text-align: center;
+      font-size: 1.5em;
+      color: #555;
+    }
+
     /* Ürünler listesi */
     .product-list {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
+      margin-top: 20px;
     }
 
     .product-item {
@@ -141,21 +156,24 @@
   <div class="sidebar">
     <h2>Kategoriler</h2>
     <ul>
-      <li><a href="#">Erkek Ayakkabıları</a></li>
-      <li><a href="#">Kadın Ayakkabıları</a></li>
-      <li><a href="#">Çocuk Ayakkabıları</a></li>
-      <li><a href="#">Spor Ayakkabıları</a></li>
-      <li><a href="#">Botlar</a></li>
-      <li><a href="#">Sandaletler</a></li>
+      <li><a href="products.html#erkek">Erkek Ayakkabıları</a></li>
+      <li><a href="products.html#kadin">Kadın Ayakkabıları</a></li>
+      <li><a href="products.html#cocuk">Çocuk Ayakkabıları</a></li>
+      <li><a href="products.html#spor">Spor Ayakkabıları</a></li>
+      <li><a href="products.html#bot">Botlar</a></li>
+      <li><a href="products.html#sandalet">Sandaletler</a></li>
     </ul>
   </div>
 
   <!-- Sayfa İçeriği -->
   <div class="content">
-    <h1>Yeni Sezon Ayakkabılar</h1>
-    <p>Modern, şık ve konforlu modeller burada!</p>
+    <!-- Sayfa Başlığı -->
+    <h1 class="header-title">Ayakkabıcım - Satış Mağazası</h1>
 
-    <!-- Ürünler Listesi -->
+    <!-- Alt Başlık -->
+    <p class="sub-title">Modern, şık ve konforlu modeller burada!</p>
+
+    <!-- Ürünler Listesi - Ana Sayfa -->
     <div class="product-list">
       <div class="product-item">
         <img src="https://via.placeholder.com/200" alt="Erkek Spor Ayakkabı">
@@ -176,6 +194,11 @@
         <button onclick="addToCart('Çocuk Bot', 199.00)">Sepete Ekle</button>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 40px;">
+      <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
+    </footer>
   </div>
 
   <!-- Sepet Sayfası -->
@@ -240,5 +263,6 @@
       window.location.href = 'index.html'; // Ana sayfaya yönlendir
     }
   </script>
+
 </body>
 </html>

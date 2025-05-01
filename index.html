@@ -16,12 +16,6 @@
     .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
     .product-item img { width: 100%; height: auto; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; position: absolute; bottom: 0; width: 100%; }
-    .cart { padding: 40px 20px; text-align: center; }
-    .cart table { width: 100%; border-collapse: collapse; }
-    .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    .payment { padding: 40px 20px; text-align: center; }
-    .payment input { padding: 8px 12px; margin: 10px 0; }
-    .payment button { background: #333; color: #fff; padding: 10px 20px; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -64,34 +58,6 @@
     </div>
   </section>
 
-  <!-- Sepet Sayfası -->
-  <section id="cart" class="cart">
-    <h2>Sepetiniz</h2>
-
-    <!-- Sepete Eklenen Ürünler -->
-    <table id="cart-table">
-      <thead>
-        <tr>
-          <th>Ürün</th>
-          <th>Adet</th>
-          <th>Fiyat</th>
-          <th>Toplam</th>
-        </tr>
-      </thead>
-      <tbody id="cart-body">
-        <!-- Dinamik olarak ürünler buraya ekleniyor -->
-      </tbody>
-    </table>
-
-    <h3>Ödeme Yöntemi Seçiniz</h3>
-    <form id="payment-form">
-      <label><input type="radio" name="payment-method" value="credit-card" /> Kredi Kartı</label><br />
-      <label><input type="radio" name="payment-method" value="paypal" /> PayPal</label><br />
-      <label><input type="radio" name="payment-method" value="bank-transfer" /> Havale/EFT</label><br />
-      <button type="submit" id="payment-button" disabled>Ödemeye Geç</button>
-    </form>
-  </section>
-
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
@@ -112,40 +78,8 @@
       if (product) {
         cart.push(product);
         alert(`${product.name} sepete eklendi!`);
-        renderCart();
       }
     }
-
-    // Sepet içeriğini render etme
-    function renderCart() {
-      const cartTableBody = document.getElementById('cart-body');
-      
-      // Sepet boşsa tabloyu temizle
-      if (cart.length === 0) {
-        cartTableBody.innerHTML = "<tr><td colspan='4'>Sepetinizde ürün bulunmamaktadır.</td></tr>";
-        return;
-      }
-      
-      // Tabloyu güncelle
-      cartTableBody.innerHTML = cart.map(item => `
-        <tr>
-          <td>${item.name}</td>
-          <td>1</td>
-          <td>₺${item.price.toFixed(2)}</td>
-          <td>₺${item.price.toFixed(2)}</td>
-        </tr>
-      `).join('');
-
-      // Ödeme butonunu aktif et
-      document.getElementById('payment-button').disabled = false;
-    }
-
-    // Ödeme işlemi
-    document.getElementById('payment-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Ödeme başarıyla tamamlandı!');
-      window.location.href = '#'; // Ana sayfaya yönlendir
-    });
   </script>
 
 </body>

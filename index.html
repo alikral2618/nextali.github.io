@@ -25,6 +25,9 @@
       top: 0;
       left: 0;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .sidebar h2 {
@@ -56,8 +59,8 @@
     }
 
     /* Sepetim kısmı */
-    .sidebar .cart {
-      margin-top: 30px;
+    .cart {
+      margin-top: auto;
       text-align: center;
       border-top: 1px solid #444;
       padding-top: 20px;
@@ -89,6 +92,26 @@
       border-radius: 50%;
       padding: 3px 8px;
       font-size: 14px;
+    }
+
+    /* İletişim Bilgileri */
+    .contact-info {
+      margin-top: 40px;
+      border-top: 1px solid #555;
+      padding-top: 20px;
+      font-size: 14px;
+      color: white;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+      text-align: center;
     }
 
     /* Sayfa içeriği */
@@ -207,118 +230,12 @@
         Sepetim <span id="cart-count" class="item-count">0</span>
       </a>
     </div>
-  </div>
 
-  <!-- Sayfa İçeriği -->
-  <div class="content">
-    <!-- Sayfa Başlığı -->
-    <h1 class="header-title">Ayakkabıcım - Satış Mağazası</h1>
-
-    <!-- Alt Başlık Değişikliği -->
-    <p class="sub-title">En Çok Satanlar</p>
-
-    <!-- Ürünler Listesi - Ana Sayfa -->
-    <div class="product-list">
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Erkek Spor Ayakkabı">
-        <p>Erkek Spor Ayakkabı</p>
-        <p>₺299,00</p>
-        <button onclick="addToCart('Erkek Spor Ayakkabı', 299.00)">Sepete Ekle</button>
-      </div>
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Kadın Günlük Ayakkabı">
-        <p>Kadın Günlük Ayakkabı</p>
-        <p>₺259,00</p>
-        <button onclick="addToCart('Kadın Günlük Ayakkabı', 259.00)">Sepete Ekle</button>
-      </div>
-      <div class="product-item">
-        <img src="https://via.placeholder.com/200" alt="Çocuk Bot">
-        <p>Çocuk Bot</p>
-        <p>₺199,00</p>
-        <button onclick="addToCart('Çocuk Bot', 199.00)">Sepete Ekle</button>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer style="text-align: center; margin-top: 40px;">
-      <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
-    </footer>
-  </div>
-
-  <!-- Sepet Sayfası -->
-  <div id="cart-page" class="cart-page" style="display: none;">
-    <h2>Sepetiniz</h2>
-    <div id="cart-items"></div>
-    <h3>Ödeme Yöntemi</h3>
-    <label>
-      <input type="radio" name="payment" value="credit-card"> Kredi Kartı
-    </label>
-    <label>
-      <input type="radio" name="payment" value="paypal"> PayPal
-    </label>
-    <div id="payment-form" style="display: none;">
-      <h3>Ödeme Bilgileri</h3>
-      <label for="card-number">Kart Numarası:</label>
-      <input type="text" id="card-number" placeholder="Kart Numarası">
-      <label for="expiry-date">Son Kullanma Tarihi:</label>
-      <input type="text" id="expiry-date" placeholder="MM/YY">
-      <label for="cvv">CVV:</label>
-      <input type="text" id="cvv" placeholder="CVV">
-      <button id="pay-btn" disabled onclick="completePayment()">Ödeme Yap</button>
-    </div>
-  </div>
-
-  <script>
-    // Sepete eklenen ürünler
-    let cart = [];
-
-    // Sepet simgesi güncelleme
-    function updateCartCount() {
-      const cartCount = document.getElementById('cart-count');
-      cartCount.textContent = cart.length;
-    }
-
-    function addToCart(product, price) {
-      // Ürün sepete ekleniyor
-      cart.push({ product, price });
-      alert(`${product} sepete eklendi!`);
-      updateCartCount();
-    }
-
-    // Sepet sayfasına yönlendirme ve sepeti gösterme
-    function showCart() {
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = ''; // Önceki öğeleri temizle
-
-      cart.forEach(item => {
-        const cartRow = document.createElement('div');
-        cartRow.innerHTML = `<p><strong>${item.product}</strong> - ₺${item.price}</p>`;
-        cartItems.appendChild(cartRow);
-      });
-    }
-
-    // Ödeme yöntemini seçme ve ödeme formunun aktif olması
-    const paymentRadioButtons = document.querySelectorAll('input[name="payment"]');
-    paymentRadioButtons.forEach(radio => {
-      radio.addEventListener('change', function() {
-        document.getElementById('payment-form').style.display = 'block';
-        document.getElementById('pay-btn').disabled = false;
-      });
-    });
-
-    // Ödeme işlemini tamamla
-    function completePayment() {
-      alert('Ödeme başarıyla tamamlandı!');
-      window.location.href = 'index.html'; // Ana sayfaya yönlendir
-    }
-
-    // Kadın Ayakkabıları Kategorisine tıklanınca içerik göster
-    window.onload = function() {
-      if (window.location.href.includes("#kadin")) {
-        document.getElementById("kadin").style.display = "block";
-      }
-    };
-  </script>
-
-</body>
-</html>
+    <!-- İletişim Bilgileri -->
+    <div class="contact-info">
+      <h3>İletişim</h3>
+      <p><strong>📧 E-posta:</strong> iletisim@ayakkabicim.com</p>
+      <p><strong>📞 Telefon:</strong> +90 212 123 45 67</p>
+      <p><strong>📍 Adres:</strong> Ay
+::contentReference[oaicite:0]{index=0}
+ 

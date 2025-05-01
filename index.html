@@ -1,78 +1,110 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Ayakkabı Dünyası</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayakkabıcım</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f7f7f7;
-      text-align: center;
-    }
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 30px 0;
-    }
-    .product {
-      background: white;
-      margin: 40px auto;
-      padding: 20px;
-      max-width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .product img {
-      max-width: 100%;
-      border-radius: 6px;
-    }
-    .product h2 {
-      color: #333;
-      margin: 15px 0 5px;
-    }
-    .product p {
-      font-size: 18px;
-      color: #555;
-    }
-    .order-button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      background-color: #27ae60;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    footer {
-      background-color: #ecf0f1;
-      padding: 20px;
-      font-size: 14px;
-      color: #333;
-      margin-top: 40px;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+    header { background: #333; color: #fff; padding: 20px; text-align: center; }
+    nav ul { list-style: none; display: flex; justify-content: center; margin-top: 10px; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a { color: #fff; text-decoration: none; font-weight: bold; }
+    .hero { background: #ddd; padding: 40px; text-align: center; }
+    .products, .product-detail, .cart, .login { padding: 40px 20px; max-width: 1200px; margin: auto; }
+    .products h2, .product-detail h2, .cart h2 { margin-bottom: 20px; }
+    .product-list { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
+    .product-item img { width: 100%; height: auto; }
+    .product-item p { margin: 10px 0; }
+    .product-item a, button { background: #333; color: #fff; padding: 8px 12px; border: none; text-decoration: none; cursor: pointer; }
+    .product-detail img { max-width: 300px; display: block; margin-bottom: 20px; }
+    .cart table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; }
+    @media(max-width: 600px) {
+      .product-list { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Ayakkabı Dünyası</h1>
-    <p>Kaliteli ve uygun fiyatlı spor ayakkabılar</p>
+    <h1>Ayakkabıcım</h1>
+    <nav>
+      <ul>
+        <li><a href="#anasayfa">Anasayfa</a></li>
+        <li><a href="#urunler">Ürünler</a></li>
+        <li><a href="#detay">Ürün Detayı</a></li>
+        <li><a href="#sepet">Sepet</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section class="product">
-    <img src="https://via.placeholder.com/400x300.png?text=Spor+Ayakkab%C4%B1" alt="Spor Ayakkabı">
-    <h2>Nike Air Max</h2>
-    <p>Fiyat: 1.200 TL</p>
-    <a class="order-button" href="https://wa.me/905xxxxxxxxx?text=Nike%20Air%20Max%20siparişi%20vermek%20istiyorum" target="_blank">WhatsApp'tan Sipariş Ver</a>
+  <!-- Hero Alanı -->
+  <section class="hero" id="anasayfa">
+    <h2>Yeni Sezon Ayakkabılar</h2>
+    <p>Modern, şık ve konforlu modeller burada!</p>
+  </section>
+
+  <!-- Ürünler -->
+  <section class="products" id="urunler">
+    <h2>Ürünler</h2>
+    <div class="product-list">
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Ürün 1" />
+        <p>Erkek Spor Ayakkabı</p>
+        <p>₺299,00</p>
+        <a href="#detay">Detaylar</a>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Ürün 2" />
+        <p>Kadın Günlük Ayakkabı</p>
+        <p>₺259,00</p>
+        <a href="#detay">Detaylar</a>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/200" alt="Ürün 3" />
+        <p>Çocuk Bot</p>
+        <p>₺199,00</p>
+        <a href="#detay">Detaylar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ürün Detay -->
+  <section class="product-detail" id="detay">
+    <h2>Ürün Detayı</h2>
+    <img src="https://via.placeholder.com/300" alt="Detay Görseli" />
+    <p><strong>Ürün Adı:</strong> Erkek Spor Ayakkabı</p>
+    <p><strong>Fiyat:</strong> ₺299,00</p>
+    <p><strong>Açıklama:</strong> Günlük kullanıma uygun, rahat tabanlı erkek spor ayakkabı.</p>
+    <button onclick="alert('Sepete eklendi!')">Sepete Ekle</button>
+  </section>
+
+  <!-- Sepet -->
+  <section class="cart" id="sepet">
+    <h2>Sepetiniz</h2>
+    <table>
+      <tr>
+        <th>Ürün</th>
+        <th>Adet</th>
+        <th>Fiyat</th>
+        <th>Toplam</th>
+      </tr>
+      <tr>
+        <td>Erkek Spor Ayakkabı</td>
+        <td>1</td>
+        <td>₺299,00</td>
+        <td>₺299,00</td>
+      </tr>
+    </table>
+    <p><strong>Genel Toplam:</strong> ₺299,00</p>
   </section>
 
   <footer>
-    <p>İletişim: 05xxxxxxxxx</p>
-    <p>© 2025 Ayakkabı Dünyası</p>
+    <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
   </footer>
 
 </body>

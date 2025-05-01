@@ -16,7 +16,7 @@
     .product-item { background: #fff; padding: 20px; border: 1px solid #ccc; text-align: center; width: 200px; }
     .product-item img { width: 100%; height: auto; }
     footer { background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px; position: absolute; bottom: 0; width: 100%; }
-    .cart, .product-detail { padding: 40px 20px; text-align: center; }
+    .cart { padding: 40px 20px; text-align: center; }
     .cart table { width: 100%; border-collapse: collapse; }
     .cart th, .cart td { border: 1px solid #ccc; padding: 10px; text-align: left; }
     .payment { padding: 40px 20px; text-align: center; }
@@ -31,55 +31,45 @@
     <h1>Ayakkabıcım</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Anasayfa</a></li>
-        <li><a href="products.html">Ürünler</a></li>
-        <li><a href="cart.html">Sepet</a></li>
+        <li><a href="#">Anasayfa</a></li>
+        <li><a href="#cart">Sepet</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Ana Sayfa -->
+  <!-- Ana Sayfa - Ürünler -->
   <section class="hero">
     <h2>Yeni Sezon Ayakkabılar</h2>
     <p>Modern, şık ve konforlu modeller burada!</p>
   </section>
 
-  <!-- Ürünler Sayfası (products.html) -->
   <section class="product-list">
     <div class="product-item">
       <img src="https://via.placeholder.com/200" alt="Erkek Spor Ayakkabı" />
       <p>Erkek Spor Ayakkabı</p>
       <p>₺299,00</p>
-      <a href="product.html?id=1">Detaylar</a>
+      <a href="#cart" onclick="addToCart(1)">Sepete Ekle</a>
     </div>
     <div class="product-item">
       <img src="https://via.placeholder.com/200" alt="Kadın Günlük Ayakkabı" />
       <p>Kadın Günlük Ayakkabı</p>
       <p>₺259,00</p>
-      <a href="product.html?id=2">Detaylar</a>
+      <a href="#cart" onclick="addToCart(2)">Sepete Ekle</a>
     </div>
     <div class="product-item">
       <img src="https://via.placeholder.com/200" alt="Çocuk Bot" />
       <p>Çocuk Bot</p>
       <p>₺199,00</p>
-      <a href="product.html?id=3">Detaylar</a>
+      <a href="#cart" onclick="addToCart(3)">Sepete Ekle</a>
     </div>
   </section>
 
-  <!-- Ürün Detayı Sayfası (product.html) -->
-  <section class="product-detail">
-    <h2>Erkek Spor Ayakkabı</h2>
-    <img src="https://via.placeholder.com/300" alt="Erkek Spor Ayakkabı" />
-    <p><strong>Fiyat:</strong> ₺299,00</p>
-    <p><strong>Renk:</strong> Siyah, Beyaz, Mavi</p>
-    <p><strong>Numara:</strong> 40, 41, 42, 43, 44</p>
-    <a href="cart.html"><button>Sepete Ekle</button></a>
-  </section>
-
-  <!-- Sepet Sayfası (cart.html) -->
-  <section class="cart">
+  <!-- Sepet Sayfası -->
+  <section id="cart" class="cart">
     <h2>Sepetiniz</h2>
-    <table>
+
+    <!-- Sepete Eklenen Ürünler -->
+    <table id="cart-table">
       <thead>
         <tr>
           <th>Ürün</th>
@@ -88,49 +78,86 @@
           <th>Toplam</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Erkek Spor Ayakkabı</td>
-          <td>1</td>
-          <td>₺299,00</td>
-          <td>₺299,00</td>
-        </tr>
+      <tbody id="cart-body">
+        <!-- Dinamik olarak ürünler buraya ekleniyor -->
       </tbody>
     </table>
-    <p><strong>Genel Toplam:</strong> ₺299,00</p>
+
+    <p><strong>Genel Toplam:</strong> <span id="total-price">₺0,00</span></p>
+
+    <h3>Seçtiğiniz Özellikler</h3>
+    <p><strong>Renk:</strong> Siyah</p>
+    <p><strong>Numara:</strong> 42</p>
 
     <h3>Ödeme Yöntemi Seçiniz</h3>
-    <form action="payment.html" method="POST">
+    <form id="payment-form">
       <label><input type="radio" name="payment-method" value="credit-card" /> Kredi Kartı</label><br />
       <label><input type="radio" name="payment-method" value="paypal" /> PayPal</label><br />
       <label><input type="radio" name="payment-method" value="bank-transfer" /> Havale/EFT</label><br />
-      <button type="submit">Ödeme Yap</button>
+      <button type="submit" id="payment-button" disabled>Ödemeye Geç</button>
     </form>
   </section>
-
-  <!-- Ödeme Sayfası (payment.html) -->
-  <section class="payment">
-    <h2>Ödeme Yöntemi Seçildi: Kredi Kartı</h2>
-    <p><strong>Fiyat:</strong> ₺299,00</p>
-    <button onclick="completePurchase()">Satın Al</button>
-  </section>
-
-  <script>
-    function addToCart() {
-      alert('Ürün sepete eklendi!');
-      window.location.href = 'cart.html';
-    }
-
-    function completePurchase() {
-      alert('Ödeme başarıyla tamamlandı!');
-      window.location.href = 'index.html';
-    }
-  </script>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Ayakkabıcım - Tüm hakları saklıdır.</p>
   </footer>
+
+  <script>
+    // Ürünleri sepete ekleme işlemi
+    const products = [
+      { id: 1, name: 'Erkek Spor Ayakkabı', price: 299.00 },
+      { id: 2, name: 'Kadın Günlük Ayakkabı', price: 259.00 },
+      { id: 3, name: 'Çocuk Bot', price: 199.00 }
+    ];
+
+    let cart = [];
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        cart.push(product);
+        alert(`${product.name} sepete eklendi!`);
+        renderCart();
+      }
+    }
+
+    // Sepet içeriğini render etme
+    function renderCart() {
+      const cartTableBody = document.getElementById('cart-body');
+      const totalPriceElement = document.getElementById('total-price');
+      
+      // Sepet boşsa tabloyu temizle
+      if (cart.length === 0) {
+        cartTableBody.innerHTML = "<tr><td colspan='4'>Sepetinizde ürün bulunmamaktadır.</td></tr>";
+        totalPriceElement.textContent = "₺0,00";
+        return;
+      }
+      
+      // Tabloyu ve toplam fiyatı güncelle
+      cartTableBody.innerHTML = cart.map(item => `
+        <tr>
+          <td>${item.name}</td>
+          <td>1</td>
+          <td>₺${item.price.toFixed(2)}</td>
+          <td>₺${item.price.toFixed(2)}</td>
+        </tr>
+      `).join('');
+
+      const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+      totalPriceElement.textContent = `₺${totalPrice.toFixed(2)}`;
+
+      // Ödeme butonunu aktif et
+      document.getElementById('payment-button').disabled = false;
+    }
+
+    // Ödeme işlemi
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Ödeme başarıyla tamamlandı!');
+      window.location.href = '#'; // Ana sayfaya yönlendir
+    });
+  </script>
 
 </body>
 </html>

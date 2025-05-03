@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayakkabıcım - Kayıt Ol / Giriş Yap</title>
   <style>
+    /* (Same styles as before) */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -309,6 +310,21 @@
     }
 
     loadProducts();
+
+    // Sayfa yüklendiğinde kontrol et
+    window.onload = function() {
+      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+      if (loggedInUser) {
+        document.getElementById("loginPage").style.display = "none";  
+        document.getElementById("storePage").style.display = "block"; 
+        loadCart();
+        loadProducts();
+      } else {
+        document.getElementById("loginPage").style.display = "block";  
+        document.getElementById("storePage").style.display = "none"; 
+      }
+    };
   </script>
+
 </body>
 </html>

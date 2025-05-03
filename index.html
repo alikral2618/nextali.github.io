@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayakkabıcım - Kayıt Ol / Giriş Yap</title>
+  <title>Ayakkabıcım - Yeni Sezon Ayakkabılar</title>
   <style>
-    /* Genel stil ve sayfa düzeni */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -115,71 +114,102 @@
       margin-right: 10px;
     }
 
-    /* Form Container */
-    .form-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-    }
-    .form-container input, .form-container button {
+    .social-login a {
+      display: inline-block;
+      padding: 10px 20px;
       margin: 10px;
-      padding: 10px;
+      background-color: #3b5998;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
     }
 
-    /* Sepet ve Giriş Sayfası */
-    .cart-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      cursor: pointer;
-    }
-
-    .cart-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      display: none;
-    }
-
-    /* Responsive Design for Mobile */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 200px;
-      }
-
-      .content {
-        margin-left: 220px;
-      }
-
-      .product-list {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .search-bar input {
-        width: 70%;
-      }
-
-      .product-item {
-        width: 90%;
-      }
+    .social-login a.google {
+      background-color: #db4437;
     }
   </style>
 </head>
 <body>
 
-  <!-- Kayıt Ol / Giriş Yap Sayfası -->
-  <div class="form-container" id="loginPage">
-    <h2>Giriş Yap veya Kayıt Ol</h2>
+  <div class="sidebar">
+    <h2>Kategoriler</h2>
+    <ul>
+      <li><a href="products.html#erkek">Erkek Ayakkabıları</a></li>
+      <li><a href="products.html#kadin">Kadın Ayakkabıları</a></li>
+      <li><a href="products.html#cocuk">Çocuk Ayakkabıları</a></li>
+      <li><a href="products.html#spor">Spor Ayakkabıları</a></li>
+      <li><a href="products.html#bot">Botlar</a></li>
+      <li><a href="products.html#sandalet">Sandaletler</a></li>
+    </ul>
 
-    <!-- Kayıt Formu -->
-    <div id="signup-form">
-      <input type="text" id="
-::contentReference[oaicite:38]{index=38}
- 
+    <div class="cart">
+      <a href="cart.html">
+        <img src="https://via.placeholder.com/25" alt="Sepet Simgesi"> 
+        Sepetim <span id="cart-count" class="item-count">0</span>
+      </a>
+    </div>
+
+    <div class="contact-info">
+      <h3>İletişim</h3>
+      <p><strong>📧 E-posta:</strong> iletisim@ayakkabicim.com</p>
+      <p><strong>📞 Telefon:</strong> +90 212 123 45 67</p>
+      <p><strong>📍 Adres:</strong> Ayakkabıcım Mahallesi, İstanbul</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 class="header-title">Yeni Sezon Ayakkabıları</h1>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Ürün ara..." id="searchInput">
+      <button onclick="searchProducts()">Ara</button>
+    </div>
+
+    <div class="social-login">
+      <a href="login-facebook.html">Facebook ile Giriş Yap</a>
+      <a href="login-google.html" class="google">Google ile Giriş Yap</a>
+    </div>
+
+    <div class="product-list" id="productList"></div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Erkek Spor Ayakkabı", price: 199, category: "erkek", image: "https://via.placeholder.com/150", description: "Erkekler için rahat spor ayakkabısı." },
+      { id: 2, name: "Kadın Topuklu Ayakkabı", price: 249, category: "kadin", image: "https://via.placeholder.com/150", description: "Şık kadın topuklu ayakkabı." },
+      { id: 3, name: "Çocuk Ayakkabısı", price: 129, category: "cocuk", image: "https://via.placeholder.com/150", description: "Çocuklar için renkli ayakkabılar." },
+    ];
+
+    function displayProducts(filteredProducts) {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+      filteredProducts.forEach(product => {
+        const productItem = document.createElement("div");
+        productItem.classList.add("product-item");
+        productItem.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price} ₺</p>
+          <button onclick="viewProduct(${product.id})">Detayları Gör</button>
+        `;
+        productList.appendChild(productItem);
+      });
+    }
+
+    function searchProducts() {
+      const searchInput = document.getElementById("searchInput").value.toLowerCase();
+      const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+      displayProducts(filteredProducts);
+    }
+
+    function viewProduct(id) {
+      window.location.href = `product-details.html?id=${id}`;
+    }
+
+    window.onload = function() {
+      displayProducts(products);
+    };
+  </script>
+
+</body>
+</html>

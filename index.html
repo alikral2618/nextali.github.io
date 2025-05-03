@@ -127,6 +127,30 @@
     .social-login a.google {
       background-color: #db4437;
     }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .content {
+        margin-left: 220px;
+      }
+
+      .product-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-bar input {
+        width: 70%;
+      }
+
+      .product-item {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -199,6 +223,9 @@
     function searchProducts() {
       const searchInput = document.getElementById("searchInput").value.toLowerCase();
       const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+      if (filteredProducts.length === 0) {
+        alert("Ürün bulunamadı.");
+      }
       displayProducts(filteredProducts);
     }
 

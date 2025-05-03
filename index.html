@@ -114,20 +114,6 @@
       margin-right: 10px;
     }
 
-    .social-login a {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px;
-      background-color: #3b5998;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    .social-login a.google {
-      background-color: #db4437;
-    }
-
     /* Responsive Design for Mobile */
     @media (max-width: 768px) {
       .sidebar {
@@ -218,11 +204,6 @@
         <button onclick="searchProducts()">Ara</button>
       </div>
 
-      <div class="social-login">
-        <a href="login-facebook.html">Facebook ile Giriş Yap</a>
-        <a href="login-google.html" class="google">Google ile Giriş Yap</a>
-      </div>
-
       <div>
         <h3>Sepetiniz</h3>
         <ul id="cart-list"></ul>
@@ -307,46 +288,27 @@
     const products = [
       { id: 1, name: "Erkek Spor Ayakkabı", price: 199, image: "https://via.placeholder.com/150" },
       { id: 2, name: "Kadın Topuklu Ayakkabı", price: 249, image: "https://via.placeholder.com/150" },
-      { id: 3, name: "Çocuk Ayakkabısı", price: 129, image: "https://via.placeholder.com/150" }
+      { id: 3, name: "Çocuk Ayakkabısı", price: 129, image: "https://via.placeholder.com/150" },
+      { id: 4, name: "Spor Ayakkabı", price: 299, image: "https://via.placeholder.com/150" }
     ];
 
-    function displayProducts(filteredProducts) {
+    // Ürünleri göster
+    function loadProducts() {
       const productList = document.getElementById("productList");
-      productList.innerHTML = "";
-      filteredProducts.forEach(product => {
-        const productItem = document.createElement("div");
-        productItem.classList.add("product-item");
-        productItem.innerHTML = `
+      products.forEach(product => {
+        const div = document.createElement("div");
+        div.classList.add("product-item");
+        div.innerHTML = `
           <img src="${product.image}" alt="${product.name}">
-          <h3>${product.name}</h3>
+          <h4>${product.name}</h4>
           <p>${product.price} ₺</p>
           <button onclick="addToCart(${product.id})">Sepete Ekle</button>
         `;
-        productList.appendChild(productItem);
+        productList.appendChild(div);
       });
     }
 
-    // Ürün arama
-    function searchProducts() {
-      const searchInput = document.getElementById("searchInput").value.toLowerCase();
-      const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
-      displayProducts(filteredProducts);
-    }
-
-    // Sayfa yüklendiğinde kontrol et
-    window.onload = function() {
-      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-      if (loggedInUser) {
-        document.getElementById("loginPage").style.display = "none";  
-        document.getElementById("storePage").style.display = "block"; 
-        loadCart();
-        displayProducts(products);
-      } else {
-        document.getElementById("loginPage").style.display = "block";  
-        document.getElementById("storePage").style.display = "none"; 
-      }
-    };
+    loadProducts();
   </script>
-
 </body>
 </html>

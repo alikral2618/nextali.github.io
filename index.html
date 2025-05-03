@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayakkabıcım - Yeni Sezon Ayakkabılar</title>
   <style>
-    /* Genel stil ayarları */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -14,7 +13,6 @@
       min-height: 100vh;
     }
 
-    /* Kategori menüsü */
     .sidebar {
       width: 250px;
       background-color: #333;
@@ -27,7 +25,6 @@
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
     }
 
     .sidebar h2 {
@@ -58,84 +55,19 @@
       background-color: #555;
     }
 
-    /* Sepetim kısmı */
-    .cart {
-      margin-top: auto;
-      text-align: center;
-      border-top: 1px solid #444;
-      padding-top: 20px;
-    }
-
-    .cart a {
-      color: white;
-      font-size: 18px;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cart a:hover {
-      background-color: #555;
-      border-radius: 5px;
-    }
-
-    .cart img {
-      width: 25px;
-      height: 25px;
-    }
-
-    .cart .item-count {
-      background-color: red;
-      color: white;
-      border-radius: 50%;
-      padding: 3px 8px;
-      font-size: 14px;
-    }
-
-    /* İletişim Bilgileri */
-    .contact-info {
-      margin-top: 40px;
-      border-top: 1px solid #555;
-      padding-top: 20px;
-      font-size: 14px;
-      color: white;
-    }
-
-    .contact-info h3 {
-      margin-bottom: 10px;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    .contact-info p {
-      margin: 5px 0;
-      text-align: center;
-    }
-
-    /* Sayfa içeriği */
     .content {
       margin-left: 270px;
       padding: 20px;
       flex-grow: 1;
     }
 
-    /* Başlık */
     .header-title {
       text-align: center;
-      margin: 40px 0;
+      margin: 20px 0;
       font-size: 2.5em;
       color: #333;
     }
 
-    .sub-title {
-      text-align: center;
-      font-size: 1.5em;
-      color: #555;
-    }
-
-    /* Ürünler listesi */
     .product-list {
       display: flex;
       flex-wrap: wrap;
@@ -170,48 +102,35 @@
       background: #555;
     }
 
-    /* Sepet sayfası */
-    .cart-page {
-      margin-left: 270px;
-      padding: 20px;
-      flex-grow: 1;
-    }
-
-    .cart-page h2 {
-      text-align: center;
-    }
-
-    .cart-page h3 {
+    .search-bar {
+      display: flex;
+      justify-content: center;
       margin-top: 20px;
     }
 
-    .cart-page label {
-      display: block;
-      margin: 10px 0;
+    .search-bar input {
+      padding: 10px;
+      width: 80%;
+      margin-right: 10px;
     }
 
-    .cart-page input {
-      padding: 8px;
-      width: 100%;
-      margin: 5px 0;
-    }
-
-    .cart-page button {
-      padding: 10px 15px;
-      background: #333;
+    .social-login a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #3b5998;
       color: white;
-      border: none;
-      cursor: pointer;
+      text-decoration: none;
+      border-radius: 5px;
     }
 
-    .cart-page button:hover {
-      background: #555;
+    .social-login a.google {
+      background-color: #db4437;
     }
   </style>
 </head>
 <body>
 
-  <!-- Kategori Menüsü -->
   <div class="sidebar">
     <h2>Kategoriler</h2>
     <ul>
@@ -222,8 +141,7 @@
       <li><a href="products.html#bot">Botlar</a></li>
       <li><a href="products.html#sandalet">Sandaletler</a></li>
     </ul>
-    
-    <!-- Sepetim -->
+
     <div class="cart">
       <a href="cart.html">
         <img src="https://via.placeholder.com/25" alt="Sepet Simgesi"> 
@@ -231,11 +149,67 @@
       </a>
     </div>
 
-    <!-- İletişim Bilgileri -->
     <div class="contact-info">
       <h3>İletişim</h3>
       <p><strong>📧 E-posta:</strong> iletisim@ayakkabicim.com</p>
       <p><strong>📞 Telefon:</strong> +90 212 123 45 67</p>
-      <p><strong>📍 Adres:</strong> Ay
-::contentReference[oaicite:0]{index=0}
- 
+      <p><strong>📍 Adres:</strong> Ayakkabıcım Mahallesi, İstanbul</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 class="header-title">Yeni Sezon Ayakkabıları</h1>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Ürün ara..." id="searchInput">
+      <button onclick="searchProducts()">Ara</button>
+    </div>
+
+    <div class="social-login">
+      <a href="login-facebook.html">Facebook ile Giriş Yap</a>
+      <a href="login-google.html" class="google">Google ile Giriş Yap</a>
+    </div>
+
+    <div class="product-list" id="productList"></div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Erkek Spor Ayakkabı", price: 199, category: "erkek", image: "https://via.placeholder.com/150", description: "Erkekler için rahat spor ayakkabısı." },
+      { id: 2, name: "Kadın Topuklu Ayakkabı", price: 249, category: "kadin", image: "https://via.placeholder.com/150", description: "Şık kadın topuklu ayakkabı." },
+      { id: 3, name: "Çocuk Ayakkabısı", price: 129, category: "cocuk", image: "https://via.placeholder.com/150", description: "Çocuklar için renkli ayakkabılar." },
+    ];
+
+    function displayProducts(filteredProducts) {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+      filteredProducts.forEach(product => {
+        const productItem = document.createElement("div");
+        productItem.classList.add("product-item");
+        productItem.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price} ₺</p>
+          <button onclick="viewProduct(${product.id})">Detayları Gör</button>
+        `;
+        productList.appendChild(productItem);
+      });
+    }
+
+    function searchProducts() {
+      const searchInput = document.getElementById("searchInput").value.toLowerCase();
+      const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+      displayProducts(filteredProducts);
+    }
+
+    function viewProduct(id) {
+      window.location.href = `product-details.html?id=${id}`;
+    }
+
+    window.onload = function() {
+      displayProducts(products);
+    };
+  </script>
+
+</body>
+</html>
